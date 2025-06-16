@@ -38,6 +38,37 @@ Email varchar(50) not null unique
 
 )
 
+Create table Cliente (
+    IDCliente int primary key identity(1,1),
+    Nombre varchar(50) not null,
+    Apellido varchar(50) not null,
+    Telefono varchar(20)
+)
+
+Create table FormaDePago (
+    IDFormaDePago TINYINT primary key identity(1,1),
+    Pago varchar(50) not null
+)
+
+Create table Venta (
+    IDVenta int primary key identity(1,1),
+    FechaVenta date not null,
+    IDCliente int null,
+    IDFormaDePago tinyint not null,
+    foreign key references Cliente(IDCliente),
+    foreign key references FormaDePago(IDFormaDePago)
+)
+
+Create table DetalleVenta (
+    IDDetalleVenta int primary key identity(1,1),
+    IDVenta int not null,
+    IDProducto int not null,
+    CantidadVenta int not null,
+    PrecioUnitario decimal(10,2) not null,
+    SubTotal as (CantidadVenta * PrecioUnitario) persisted,
+    foreign key references Venta (IDVenta),
+    foreign key references Producto(IDProducto)
+)
 
 
 
