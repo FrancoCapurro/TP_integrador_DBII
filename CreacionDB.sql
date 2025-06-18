@@ -60,7 +60,7 @@ GO
 Create table Venta (
     IDVenta int primary key identity(1,1),
     FechaVenta date not null,
-    TotalVenta decimal(10,2) not null CHECK(TotalVenta>0),
+    TotalVenta decimal(10,2) not null CHECK(TotalVenta>=0),
 	IDCliente int null foreign key references Cliente(IDCliente),
 	IDFormaDePago TINYINT not null foreign key references FormaDePago(IDFormaDePago)
 )
