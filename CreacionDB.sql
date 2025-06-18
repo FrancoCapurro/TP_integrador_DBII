@@ -73,7 +73,8 @@ CREATE TABLE Compra (
     IDCompra int not null PRIMARY KEY IDENTITY (1,1),
     FechaCompra DATE NOT NULL,
     IDFormaDePago TINYINT not null FOREIGN KEY REFERENCES FormaDePago(IDFormaDePago),
-    IDProveedor INTEGER NOT NULL FOREIGN KEY REFERENCES Proveedor (IDProveedor)
+    IDProveedor INTEGER NOT NULL FOREIGN KEY REFERENCES Proveedor (IDProveedor),
+    TotalCompra DECIMAL (10, 2) NOT NULL CHECK(TotalCompra>0)
 )
 GO
 CREATE TABLE DetalleCompra(
@@ -81,7 +82,7 @@ CREATE TABLE DetalleCompra(
     IDProducto int not NULL FOREIGN KEY REFERENCES Producto(IDProducto),
     CantidadCompra int not null CHECK (CantidadCompra>0),
     CostoUnitario decimal (10,2) not null CHECK(CostoUnitario>=0),
-    TotalCompra decimal (10,2) not null CHECK(TotalCompra>=1),
+    SubTotalCompra decimal (10,2) not null CHECK(SubTotalCompra>0),
     PRIMARY key (IDCompra, IDProducto)
 )
 GO 
