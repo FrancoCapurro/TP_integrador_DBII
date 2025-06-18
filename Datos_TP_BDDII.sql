@@ -126,3 +126,6 @@ insert into ProveedorProducto (IDProveedor, IDProducto, PrecioRef) values
 (2,	19,	21633.30),
 (2,	20,	13214.06);
 
+
+-- PARA PROBAR PROCEDIMIENTOS VENTA
+UPDATE Producto SET Stock = 100
