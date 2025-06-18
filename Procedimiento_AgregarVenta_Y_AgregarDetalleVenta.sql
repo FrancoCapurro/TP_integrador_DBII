@@ -4,25 +4,24 @@ Create PROCEDURE SP_AgregarVenta (
     @IDFormaDePago INT,
 	@IDProducto INT,
 	@Cantidad INT
-	
 )
 AS
 BEGIN
-    -- Validaci髇 de fecha
+    -- Validaci贸n de fecha
     IF(@FECHA > GETDATE())  
     BEGIN
-        RAISERROR('La fecha de venta no puede ser mayor al d韆 de hoy.', 16, 1);
+        RAISERROR('La fecha de venta no puede ser mayor al d铆a de hoy.', 16, 1);
         RETURN
     END	
 
-    -- Validaci髇 de existencia del cliente
+    -- Validaci贸n de existencia del cliente
     IF NOT EXISTS (SELECT 1 FROM Cliente WHERE IDCliente = @IDCliente) 
     BEGIN
         RAISERROR('Cliente ingresado inexistente.', 16, 1);
         RETURN
     END
 	
-    -- Validaci髇 de existencia de forma de pago
+    -- Validaci贸n de existencia de forma de pago
     IF NOT EXISTS (SELECT 1 FROM FormaDePago WHERE IDFormaDePago = @IDFormaDePago) 
     BEGIN
         RAISERROR('Forma de pago ingresada inexistente.', 16, 1);
@@ -31,14 +30,14 @@ BEGIN
 
 	-- Validacion producto existente
 
-	  IF NOT EXISTS (SELECT 1 FROM Producto WHERE IDProducto = @IDProducto) 
+    IF NOT EXISTS (SELECT 1 FROM Producto WHERE IDProducto = @IDProducto) 
     BEGIN
         RAISERROR('Producto ingresado inexistente.', 16, 1);
         RETURN
     END
 
 	-- Validacion Cantidad ingresada
-	IF @Cantidad <= 0
+    IF (@Cantidad <= 0)
     BEGIN
         RAISERROR('Cantidad no puede ser 0 o menor', 16, 1);
         RETURN
@@ -50,37 +49,33 @@ BEGIN
 
 
 	-- VALIDACION CANTIDAD MAYOR A STOCK DISPONIBLE
-	IF @Cantidad > @StockDisponble 
+	IF (@Cantidad > @StockDisponble) 
 	BEGIN
 		RAISERROR('Cantidad mayor a stock disponible actual',16,1)
 		RETURN
-		END
+	END
 
 
-		 DECLARE @IDVenta INT
-    -- Intento de inserci髇
-    BEGIN TRY
-		Begin TRANSACTION
-        INSERT INTO Venta (FechaVenta, IDCliente, IDFormaDePago, TotalVenta)
-        VALUES (@FECHA, @IDCliente, @IDFormaDePago,0);
-
+       DECLARE @IDVenta INT
+    -- Intento de inserci贸n
+        BEGIN TRY
+	    Begin TRANSACTION
+	        INSERT INTO Venta (FechaVenta, IDCliente, IDFormaDePago, TotalVenta)
+	        VALUES (@FECHA, @IDCliente, @IDFormaDePago,0);
 
 		--DEVUELVE EL ULTIMO ID INSERTADO EN VENTA
 		SET @IDVenta = SCOPE_IDENTITY()
 
 		--SE AGREGA UN DETALLE 
-
 		EXEC SP_AgregarDetalle @IDVenta,@IDProducto,@Cantidad
 
-	COMMIT TRANSACTION
+	   COMMIT TRANSACTION
     END TRY
    BEGIN CATCH
     IF @@TRANCOUNT > 0
         ROLLBACK TRANSACTION
-
-
     RAISERROR('ERROR INESPERADO', 16,1);
-END CATCH
+   END CATCH
 
 END
 
@@ -111,10 +106,10 @@ IF NOT EXISTS (SELECT 1 FROM Venta WHERE IDVenta = @IDVenta)
 
 		--VALIDACION CANTIDAD
 	IF (@Cantidad <= 0) 
-	BEGIN
-	RAISERROR('Cantidad no puede ser 0 o negativo',16,1)
-	RETURN
-	END
+	  BEGIN
+		RAISERROR('Cantidad no puede ser 0 o negativo',16,1)
+		RETURN
+	  END
 
 	DECLARE @StockDisponible INT
 
@@ -124,7 +119,7 @@ IF NOT EXISTS (SELECT 1 FROM Venta WHERE IDVenta = @IDVenta)
 	BEGIN
 		RAISERROR('Cantidad mayor a stock disponible actual',16,1)
 		RETURN
-		END
+	END
 
 	BEGIN TRY
 		BEGIN TRANSACTION
@@ -161,9 +156,7 @@ IF NOT EXISTS (SELECT 1 FROM Venta WHERE IDVenta = @IDVenta)
 	UPDATE Venta 
 	SET TotalVenta = TotalVenta + @Subtotal
 	WHERE IDVenta = @IDVenta
-
 	END
-
 
 	COMMIT TRANSACTION
 	END TRY
