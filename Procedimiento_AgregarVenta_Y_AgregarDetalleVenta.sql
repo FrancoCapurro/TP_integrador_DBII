@@ -15,7 +15,7 @@ BEGIN
     END	
 
     -- Validación de existencia del cliente
-    IF NOT EXISTS (SELECT 1 FROM Cliente WHERE IDCliente = @IDCliente) 
+    IF @IDCliente IS NOT NULL AND NOT EXISTS (SELECT 1 FROM Cliente WHERE IDCliente = @IDCliente) 
     BEGIN
         RAISERROR('Cliente ingresado inexistente.', 16, 1);
         RETURN
