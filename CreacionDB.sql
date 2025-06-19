@@ -35,7 +35,7 @@ GO
 Create table Proveedor (
 IDProveedor int primary key not null identity(1,1),
 RazonSocial varchar(50) not null unique,
-CUIT varchar(11) not null unique,
+CUIT varchar(13) not null unique,
 Direccion varchar(50) not null,
 Email varchar(50) not null unique
 
