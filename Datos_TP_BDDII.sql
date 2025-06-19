@@ -11,7 +11,7 @@ insert into Marca (NombreMarca) values
 ('Adidas'),
 ('M&M');
 
-insert into Producto (NombreProducto, Talle, Color, PrecioDeLista, Stock, IDCategoria, IDMarca) values
+insert into Producto (NombreProducto, Talle, Color, PrecioLista, Stock, IDCategoria, IDMarca) values
 ('Pantalones azul entallada', 'M', 'Azul', 18438.49, 0, 2, 4),
 ('Pantalones verde de verano', 'L', 'Verde', 35457.88, 0, 2, 2),
 ('Vestidos negro ajustado', 'XL', 'Negro', 48885.70, 0, 3, 4),
