@@ -136,26 +136,26 @@ IF NOT EXISTS (SELECT 1 FROM Venta WHERE IDVenta = @IDVenta)
 
 	IF EXISTS (SELECT 1 FROM DetalleVenta WHERE IDVenta = @IDVenta AND IDProducto = @IDProducto)
 	BEGIN
+		Update Venta
+		SET TotalVenta = TotalVenta + @Subtotal
+		WHERE IDVenta = @IDVenta
+
 		UPDATE DetalleVenta
 		SET CantidadVenta = CantidadVenta +  @Cantidad,
 		SubTotalVenta = SubTotalVenta + @Subtotal
 		WHERE IDVenta = @IDVenta  AND IDProducto = @IDProducto
-
-		Update Venta
-		SET TotalVenta = TotalVenta + @Subtotal
-		WHERE IDVenta = @IDVenta
 		End
 
 		ELSE BEGIN
 
 		-- SI EL PRODUCTO NO ESTA EN EL DETALLE
+		UPDATE Venta 
+	SET TotalVenta = TotalVenta + @Subtotal
+	WHERE IDVenta = @IDVenta
+
 	Insert INTO DetalleVenta(IDVenta,IDProducto,
 	CantidadVenta,PrecioUnitario,SubTotalVenta)
 	VALUES (@IDVenta,@IDProducto,@Cantidad,@Precio,@Subtotal)
-
-	UPDATE Venta 
-	SET TotalVenta = TotalVenta + @Subtotal
-	WHERE IDVenta = @IDVenta
 	END
 
 	COMMIT TRANSACTION
