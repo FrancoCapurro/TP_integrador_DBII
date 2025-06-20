@@ -129,3 +129,14 @@ insert into ProveedorProducto (IDProveedor, IDProducto, PrecioRef) values
 
 -- PARA PROBAR PROCEDIMIENTOS VENTA
 UPDATE Producto SET Stock = 100
+
+INSERT INTO Cliente (Nombre, Apellido, Telefono) VALUES
+('Martín', 'Gómez', '1134567890'),
+('Sofía', 'Rodríguez', '1145678901');
+
+INSERT INTO Venta (FechaVenta, TotalVenta, IDCliente, IDFormaDePago)
+VALUES ('2025-06-20', 60000.00, 3, 4);
+
+-- Venta 2
+INSERT INTO Venta (FechaVenta, TotalVenta, IDCliente, IDFormaDePago)
+VALUES ('2025-06-19', 85000.00, 2, 3)
