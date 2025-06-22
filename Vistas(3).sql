@@ -1,11 +1,10 @@
---USE TPI_BDII_GRUPO18
-
-CREATE VIEW VW_Top5ProductosMasVendidos_Mes AS
+USE TPI_BDII_GRUPO18
+CREATE VIEW VW_Top3ProductosMasVendidos_Mes AS
 SELECT 
     Anio,
     Mes,
     IDProducto,
-    NombreProducto AS Producto,
+    NombreProducto AS Productos,
     NombreMarca,
     NombreCategoria,
     TotalUnidadesVendidas
@@ -35,17 +34,17 @@ FROM (
         m.NombreMarca, 
         c.NombreCategoria
 ) AS TopMensual
-WHERE Pos_maxima <= 5;
+WHERE Pos_maxima <= 3;
 
--- los top 5 productos más vendidos por mes
-/*SELECT * FROM VW_Top5ProductosMasVendidos_Mes
+-- los top 3 productos más vendidos por mes
+/*SELECT * FROM VW_Top3ProductosMasVendidos_Mes
 ORDER BY Anio, Mes, TotalUnidadesVendidas DESC;*/
 
-/*SELECT * FROM VW_Top5ProductosMasVendidos_Mes
-WHERE Anio = 2025 AND Mes = 5;*/
+/*SELECT * FROM VW_Top3ProductosMasVendidos_Mes
+WHERE Anio = 2025 AND Mes =5;*/
 
-/*SELECT * FROM VW_Top5ProductosMasVendidos_Mes
-WHERE Anio = 2025 AND NombreMarca = 'Zara'
+/*SELECT * FROM VW_Top3ProductosMasVendidos_Mes
+WHERE Anio = 2025 AND NombreMarca ='Zara'
 ORDER BY Mes, TotalUnidadesVendidas DESC;*/
 
 
@@ -56,7 +55,7 @@ SELECT
     m.NombreMarca,
     p.IDProducto,
     p.NombreProducto AS Productos,
-    --p.Stock,
+    p.Stock,
     pr.IDProveedor,
     pr.RazonSocial AS Proveedores,
     pp.PrecioRef AS MejorPrecioReferencia
@@ -75,20 +74,17 @@ WHERE pp.PrecioRef = (
 
 --LLAMADOS:
 /*SELECT * FROM VW_MejorPrecio_Categoria_Marca
-WHERE Stock > 0;*/
+WHERE Stock > 50;*/
 
-/*SELECT * FROM VW_MejorPrecio_Categoria_Marca
-WHERE Stock < 10;*/
+
 
 /*SELECT * FROM VW_MejorPrecio_Categoria_Marca
 WHERE NombreMarca = 'Zara'
-  AND NombreCategoria = 'REMERA'
+  AND NombreCategoria = 'pantalon'
   AND MejorPrecioReferencia <= 40000
-  --AND Stock > 0
+  AND Stock > 10
 ORDER BY MejorPrecioReferencia;*/
 
-/*SELECT * FROM VW_MejorPrecio_Categoria_Marca
-WHERE Stock < 10;*/
 
 --TERCERA VISTA
 
@@ -110,10 +106,10 @@ GROUP BY
 
 
 /*SELECT * FROM VW_Proveedor_MasCompras_PrecioReferencia
-WHERE CantidadCompras >=1;*/
+WHERE CantidadCompras >=1 AND TotalProductosComprados >500;*/
 
 /*SELECT * FROM VW_Proveedor_MasCompras_PrecioReferencia
-WHERE MontoTotalComprado > 7600000.00;*/
+WHERE MontoTotalComprado > 8000000.00;*/
 
 /*SELECT * FROM VW_Proveedor_MasCompras_PrecioReferencia
-ORDER BY CantidadCompras DESC;*/
+ORDER BY MontoTotalComprado DESC;*/
