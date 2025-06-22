@@ -32,8 +32,8 @@ Talle varchar(6) not null,
 PrecioLista decimal (10,2) not null check (PrecioLista >= 1),
 Stock int not null check (Stock >= 0 ),
 IDCategoria int not null foreign key references Categoria(IDCategoria),
-IDMarca int not null foreign key references Marca(IDMarca),
-IDColor int not null foreign key references Color(IDColor)
+IDMarca int not null foreign key references Marcas(IDMarca),
+IDColor int not null foreign key references Colores(IDColor)
 
 )
 GO
@@ -68,8 +68,8 @@ Create table Ventas (
     IDVenta int primary key identity(1,1),
     FechaVenta date not null,
     TotalVenta decimal(10,2) not null CHECK(TotalVenta>=0),
-	IDCliente int null foreign key references Cliente(IDCliente),
-	IDFormaDePago TINYINT not null foreign key references FormaDePago(IDFormaDePago)
+	IDCliente int null foreign key references Clientes(IDCliente),
+	IDFormaDePago TINYINT not null foreign key references FormasDePagos(IDFormaDePago)
 )
 GO
 
@@ -77,8 +77,8 @@ Create table DetallesVentas (
     CantidadVenta int not null check (CantidadVenta > 0),
     PrecioUnitario decimal(10,2) not null check (PrecioUnitario >= 0),
     SubTotalVenta decimal(10,2) not null check(SubTotalVenta >= 0),
-	IDVenta int not null foreign key references Venta(IDVenta),
-	IDProducto INT not null foreign key references Producto(IDProducto),
+	IDVenta int not null foreign key references Ventas(IDVenta),
+	IDProducto INT not null foreign key references Productos(IDProducto),
     primary key (IDVenta,IDProducto),
 )
 GO
@@ -86,8 +86,8 @@ GO
 CREATE TABLE Compras (
     IDCompra int not null PRIMARY KEY IDENTITY (1,1),
     FechaCompra DATE NOT NULL,
-    IDFormaDePago TINYINT not null FOREIGN KEY REFERENCES FormaDePago(IDFormaDePago),
-    IDProveedor INTEGER NOT NULL FOREIGN KEY REFERENCES Proveedor (IDProveedor),
+    IDFormaDePago TINYINT not null FOREIGN KEY REFERENCES FormasDePagos(IDFormaDePago),
+    IDProveedor INTEGER NOT NULL FOREIGN KEY REFERENCES Proveedores(IDProveedor),
     TotalCompra DECIMAL (10, 2) NOT NULL CHECK(TotalCompra>0)
 )
 GO
@@ -103,8 +103,8 @@ GO
 
 
 CREATE TABLE  ProveedoresProductos(
-    IDProveedor INT NOT NULL FOREIGN KEY REFERENCES Proveedor(IDProveedor),
-    IDProducto INT NOT NULL FOREIGN KEY REFERENCES Producto(IDProducto),
+    IDProveedor INT NOT NULL FOREIGN KEY REFERENCES Proveedores(IDProveedor),
+    IDProducto INT NOT NULL FOREIGN KEY REFERENCES Productos(IDProducto),
     PrecioRef DECIMAL (10,2) NOT NULL CHECK (PrecioRef>0), 
     PRIMARY KEY (IDProveedor, IDProducto)
 )
@@ -120,8 +120,8 @@ GO
 
 CREATE TABLE MovimientosInventarios(
     IDMovimiento INTEGER NOT NULL PRIMARY KEY IDENTITY (1,1),
-    IDProducto INTEGER NOT NULL FOREIGN KEY REFERENCES Producto(IDProducto),
-    IDTipoMovimiento TINYINT NOT NULL FOREIGN KEY REFERENCES TipoMovimiento (IDTipoMovimiento),
+    IDProducto INTEGER NOT NULL FOREIGN KEY REFERENCES Productos(IDProducto),
+    IDTipoMovimiento TINYINT NOT NULL FOREIGN KEY REFERENCES TiposMovimientos(IDTipoMovimiento),
     Cantidad INTEGER NOT NULL CHECK (Cantidad>0),
     FechaMovimiento DATE NOT NULL
 	)
