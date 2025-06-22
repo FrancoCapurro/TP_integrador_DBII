@@ -4,10 +4,11 @@ USE TPI_BDII_GRUPO18
 
 CREATE VIEW Vista_Productos_Stock AS
 SELECT 
-    p.IDProducto, p.NombreProducto AS Productos, c.NombreCategoria, m.NombreMarca, p.Talle, m.NombreColor, p.PrecioLista, p.Stock
+    p.IDProducto, p.NombreProducto AS Productos, c.NombreCategoria, m.NombreMarca, p.Talle, co.NombreColor, p.PrecioLista, p.Stock
 FROM Productos p
 JOIN Categorias c ON p.IDCategoria = c.IDCategoria
-JOIN Marcas m ON p.IDMarca = m.IDMarca;
+JOIN Marcas m ON p.IDMarca = m.IDMarca
+INNER JOIN Colores co ON p.IDColor = co.IDColor
 
 --select * from Vista_Productos_Stock
 --SELECT * FROM Vista_Productos_Stock WHERE Stock = 0;
