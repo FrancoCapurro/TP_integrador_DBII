@@ -15,14 +15,14 @@ BEGIN
     END	
 
     -- Validación de existencia del cliente
-    IF @IDCliente IS NOT NULL AND NOT EXISTS (SELECT 1 FROM Cliente WHERE IDCliente = @IDCliente) 
+    IF @IDCliente IS NOT NULL AND NOT EXISTS (SELECT 1 FROM Clientes WHERE IDCliente = @IDCliente) 
     BEGIN
         RAISERROR('Cliente ingresado inexistente.', 16, 1);
         RETURN
     END
 	
     -- Validación de existencia de forma de pago
-    IF NOT EXISTS (SELECT 1 FROM FormaDePago WHERE IDFormaDePago = @IDFormaDePago) 
+    IF NOT EXISTS (SELECT 1 FROM FormasDePagos WHERE IDFormaDePago = @IDFormaDePago) 
     BEGIN
         RAISERROR('Forma de pago ingresada inexistente.', 16, 1);
         RETURN
@@ -30,7 +30,7 @@ BEGIN
 
 	-- Validacion producto existente
 
-    IF NOT EXISTS (SELECT 1 FROM Producto WHERE IDProducto = @IDProducto) 
+    IF NOT EXISTS (SELECT 1 FROM Productos WHERE IDProducto = @IDProducto) 
     BEGIN
         RAISERROR('Producto ingresado inexistente.', 16, 1);
         RETURN
@@ -45,7 +45,7 @@ BEGIN
 
 	DECLARE @StockDisponble INT
 
-	SELECT @StockDisponble = Stock FROM Producto WHERE IDProducto = @IDProducto
+	SELECT @StockDisponble = Stock FROM Productos WHERE IDProducto = @IDProducto
 
 
 	-- VALIDACION CANTIDAD MAYOR A STOCK DISPONIBLE
@@ -60,7 +60,7 @@ BEGIN
     -- Intento de inserción
         BEGIN TRY
 	    Begin TRANSACTION
-	        INSERT INTO Venta (FechaVenta, IDCliente, IDFormaDePago, TotalVenta)
+	        INSERT INTO Ventas (FechaVenta, IDCliente, IDFormaDePago, TotalVenta)
 	        VALUES (@FECHA, @IDCliente, @IDFormaDePago,0);
 
 		--DEVUELVE EL ULTIMO ID INSERTADO EN VENTA
@@ -89,7 +89,7 @@ AS
 BEGIN
 
 --VALIDACION ID VENTA
-IF NOT EXISTS (SELECT 1 FROM Venta WHERE IDVenta = @IDVenta)
+IF NOT EXISTS (SELECT 1 FROM Ventas WHERE IDVenta = @IDVenta)
 	BEGIN
 		RAISERROR('No existe venta con ese id',16,1)
 		RETURN
@@ -97,7 +97,7 @@ IF NOT EXISTS (SELECT 1 FROM Venta WHERE IDVenta = @IDVenta)
 
 	--VALIDACION ID PRODUCTO
 
-	IF NOT EXISTS (SELECT 1 FROM Producto WHERE IDProducto = @IDProducto)
+	IF NOT EXISTS (SELECT 1 FROM Productos WHERE IDProducto = @IDProducto)
 		BEGIN 
 			RAISERROR('No existe producto con ese id',16,1)
 			RETURN
@@ -134,13 +134,13 @@ IF NOT EXISTS (SELECT 1 FROM Venta WHERE IDVenta = @IDVenta)
 
 	--VALIDACION SI EL PRODUCTO A INGRESAR YA ESTA EN EL DETALLE
 
-	IF EXISTS (SELECT 1 FROM DetalleVenta WHERE IDVenta = @IDVenta AND IDProducto = @IDProducto)
+	IF EXISTS (SELECT 1 FROM DetallesVentas WHERE IDVenta = @IDVenta AND IDProducto = @IDProducto)
 	BEGIN
-		Update Venta
+		Update Ventas
 		SET TotalVenta = TotalVenta + @Subtotal
 		WHERE IDVenta = @IDVenta
 
-		UPDATE DetalleVenta
+		UPDATE DetallesVentas
 		SET CantidadVenta = CantidadVenta +  @Cantidad,
 		SubTotalVenta = SubTotalVenta + @Subtotal
 		WHERE IDVenta = @IDVenta  AND IDProducto = @IDProducto
@@ -149,11 +149,11 @@ IF NOT EXISTS (SELECT 1 FROM Venta WHERE IDVenta = @IDVenta)
 		ELSE BEGIN
 
 		-- SI EL PRODUCTO NO ESTA EN EL DETALLE
-		UPDATE Venta 
+		UPDATE Ventas 
 	SET TotalVenta = TotalVenta + @Subtotal
 	WHERE IDVenta = @IDVenta
 
-	Insert INTO DetalleVenta(IDVenta,IDProducto,
+	Insert INTO DetallesVentas(IDVenta,IDProducto,
 	CantidadVenta,PrecioUnitario,SubTotalVenta)
 	VALUES (@IDVenta,@IDProducto,@Cantidad,@Precio,@Subtotal)
 	END

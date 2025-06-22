@@ -1,17 +1,17 @@
 USE TPI_BDII_GRUPO18 
 
-insert into Categoria (NombreCategoria) values
+insert into Categorias (NombreCategoria) values
 ('REMERA'),
 ('PANTALON'),
 ('VESTIDO');
 
-insert into Marca (NombreMarca) values
+insert into Marcas (NombreMarca) values
 ('Lululemon'),
 ('Zara'),
 ('Adidas'),
 ('M&M');
 
-insert into Producto (NombreProducto, Talle, Color, PrecioLista, Stock, IDCategoria, IDMarca) values
+insert into Productos (NombreProducto, Talle, IDColor, PrecioLista, Stock, IDCategoria, IDMarca) values
 ('Pantalones azul entallada', 'M', 'Azul', 18438.49, 0, 2, 4),
 ('Pantalones verde de verano', 'L', 'Verde', 35457.88, 0, 2, 2),
 ('Vestidos negro ajustado', 'XL', 'Negro', 48885.70, 0, 3, 4),
@@ -53,18 +53,18 @@ insert into Producto (NombreProducto, Talle, Color, PrecioLista, Stock, IDCatego
 ('Remeras deportiva azul movimiento libre', 'M', 'Azul', 21678.26, 0, 1, 3),
 ('Remeras deportiva negro entrenamiento', 'M', 'Negro', 45605.65, 0, 1, 3);
 
-insert into FormaDePago (Pago) values
+insert into FormasDePagos (Pago) values
 ('Efectivo'),
 ('Debito'),
 ('Cretito'),
 ('Transferencia');
 
-insert into Proveedor (RazonSocial, CUIT, Direccion, Email) values
+insert into Proveedores (RazonSocial, CUIT, Direccion, Email) values
 ('Azul y Oro', '24-31057997-8', 'Cochabamba 3141-CABA', 'azulyoro@contacto.com'),
 ('Del oeste', '34-72555705-3', 'Uruguay 210-Moron', 'deloeste@business.com'),
 ('De Limache', '24-47069195-2', 'Alamos 272-CABA', 'Limaches@contacto.com');
 
-insert into ProveedorProducto (IDProveedor, IDProducto, PrecioRef) values
+insert into ProveedoresProductos (IDProveedor, IDProducto, PrecioRef) values
 (3,	21,	15909.97),
 (3,	22,	22806.89),
 (3,	23,	19455.70),
@@ -128,33 +128,33 @@ insert into ProveedorProducto (IDProveedor, IDProducto, PrecioRef) values
 
 
 -- PARA PROBAR PROCEDIMIENTOS VENTA
-UPDATE Producto SET Stock = 100
+UPDATE Productos SET Stock = 100
 
-INSERT INTO Cliente (Nombre, Apellido, Telefono) VALUES
+INSERT INTO Clientes (Nombre, Apellido, Telefono) VALUES
 ('Martín', 'Gómez', '1134567890'),
 ('Sofía', 'Rodríguez', '1145678901');
 
-INSERT INTO Venta (FechaVenta, TotalVenta, IDCliente, IDFormaDePago)
+-- Venta 
+INSERT INTO Ventas (FechaVenta, TotalVenta, IDCliente, IDFormaDePago)
 VALUES ('2025-06-20', 60000.00, 3, 4);
 
-
--- Venta 2
-INSERT INTO Venta (FechaVenta, TotalVenta, IDCliente, IDFormaDePago)
+-- Venta 
+INSERT INTO Ventas (FechaVenta, TotalVenta, IDCliente, IDFormaDePago)
 VALUES ('2025-06-19', 85000.00, 2, 3)
 
 --NUEVOS DATOS PARA VISTAS
-INSERT INTO Venta (FechaVenta, TotalVenta, IDCliente, IDFormaDePago) VALUES
+INSERT INTO Ventas (FechaVenta, TotalVenta, IDCliente, IDFormaDePago) VALUES
 ('2025-06-01', 36876.98, 1, 1),
 ('2025-06-01', 48885.70, 2, 2),
 ('2025-06-02', 45153.05, 3, 3),
 ('2025-06-02', 41051.02, 4, 4),
 ('2025-06-03', 36151.54, 5, 1);
 
-INSERT INTO DetalleVenta (CantidadVenta, PrecioUnitario, SubTotalVenta, IDVenta, IDProducto) VALUES
+INSERT INTO DetallesVentas (CantidadVenta, PrecioUnitario, SubTotalVenta, IDVenta, IDProducto) VALUES
 (2, 18438.49, 36876.98, 1, 1),
 (1, 48885.70, 48885.70, 2, 3),
 (1, 45153.05, 45153.05, 3, 5),
 (1, 41051.02, 41051.02, 4, 6),
 (1, 36151.54, 36151.54, 5, 8);
 
-SELECT * FROM DetalleVenta
+--SELECT * FROM DetallesVentas

@@ -1,4 +1,4 @@
-CREATE TRIGGER DescontarStock ON DetalleVenta
+CREATE TRIGGER DescontarStock ON DetallesVentas
 After INSERT 
 AS
 BEGIN
@@ -9,7 +9,7 @@ BEGIN
         SELECT @IDProducto = IDProducto FROM inserted
 		SELECT @Cantidad = CantidadVenta FROM inserted;
        
-        UPDATE Producto
+        UPDATE Productos
         SET Stock = Stock - @Cantidad
         WHERE IDProducto = @IDProducto;
 
