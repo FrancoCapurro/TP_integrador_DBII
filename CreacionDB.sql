@@ -31,7 +31,7 @@ NombreProducto varchar(50) not null,
 Talle varchar(6) not null,
 PrecioLista decimal (10,2) not null check (PrecioLista >= 1),
 Stock int not null check (Stock >= 0 ),
-IDCategoria int not null foreign key references Categoria(IDCategoria),
+IDCategoria int not null foreign key references Categorias(IDCategoria),
 IDMarca int not null foreign key references Marcas(IDMarca),
 IDColor int not null foreign key references Colores(IDColor)
 
@@ -92,8 +92,8 @@ CREATE TABLE Compras (
 )
 GO
 CREATE TABLE DetallesCompras(
-    IDCompra int not NULL FOREIGN KEY REFERENCES Compra (IDCompra),
-    IDProducto int not NULL FOREIGN KEY REFERENCES Producto(IDProducto),
+    IDCompra int not NULL FOREIGN KEY REFERENCES Compras(IDCompra),
+    IDProducto int not NULL FOREIGN KEY REFERENCES Productos(IDProducto),
     CantidadCompra int not null CHECK (CantidadCompra>0),
     CostoUnitario decimal (10,2) not null CHECK(CostoUnitario>=0),
     SubTotalCompra decimal (10,2) not null CHECK(SubTotalCompra>0),
