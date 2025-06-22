@@ -140,7 +140,10 @@ UPDATE Productos SET Stock = 100
 
 INSERT INTO Clientes (Nombre, Apellido, Telefono) VALUES
 ('Martín', 'Gómez', '1134567890'),
-('Sofía', 'Rodríguez', '1145678901');
+('Sofía', 'Rodríguez', '1145678901'),
+('Lucas', 'Fernández', '1156789012'),
+('Valentina', 'López', '1167890123'),
+('Mateo', 'Pérez', '1178901234');
 
 -- Venta 
 INSERT INTO Ventas (FechaVenta, TotalVenta, IDCliente, IDFormaDePago)
