@@ -15,7 +15,6 @@ El sistema desarrollado permite gestionar de manera eficiente el inventario de u
 
 ## 🚀 Funcionalidades
 
-### 🔹 
 - Gestión de productos: Permite registrar y administrar los productos disponibles, incluyendo su descripción, precio, stock actual, talle, color, categoría, marca y proveedor. El stock se actualiza automáticamente con cada entrada (compra) o salida (venta) registrada.
 - Clasificación por categorías y marcas: Los productos se organizan por categoría (por ejemplo: remeras, pantalones, calzado) y por marca, lo que facilita su consulta y administración.
 - Gestión de proveedores: Permite almacenar y consultar la información de los proveedores de cada producto, incluyendo datos de contacto, dirección y precios de compra.
@@ -23,16 +22,19 @@ El sistema desarrollado permite gestionar de manera eficiente el inventario de u
 
 ## 🛠️ Tecnologías Utilizadas
 - Visual studio Code, Docker Desktop,GitHub.
+## 🏗️ Documentación
+   ```bash
+    https://docs.google.com/document/d/1IHCg9TgVfF-A2aVB8Koc9nbLTVzGf117uW_OHL2q-1A/edit?tab=t.0
+   ```
 
 ## 🏗️  Repositorio
    ```bash
     https://github.com/FrancoCapurro/TP_integrador_DBII
    ```
 
-
 ## 🔄 Diagrama DER
  ```bash
-    https://www.drawdb.app/editor?shareId=0fe79cfa667e70d98b03fddad6ee92cc
+    https://www.drawdb.app/editor?shareId=77bbbee1d7ea7a31e15e969a4785faa6
 ```
 ## Link de video
  ```bash
