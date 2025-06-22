@@ -113,7 +113,7 @@ IF NOT EXISTS (SELECT 1 FROM Ventas WHERE IDVenta = @IDVenta)
 
 	DECLARE @StockDisponible INT
 
-	SELECT @StockDisponible = Stock FROM Producto WHERE IDProducto = @IDProducto
+	SELECT @StockDisponible = Stock FROM Productos WHERE IDProducto = @IDProducto
 
 	IF (@Cantidad > @StockDisponible)
 	BEGIN
@@ -127,7 +127,7 @@ IF NOT EXISTS (SELECT 1 FROM Ventas WHERE IDVenta = @IDVenta)
 	DECLARE @Precio DECIMAL(10,2)
 	DECLARE @Subtotal Decimal(10,2)
 
-	SELECT @Precio =  PrecioLista FROM Producto WHERE IDProducto = @IDProducto
+	SELECT @Precio =  PrecioLista FROM Productos WHERE IDProducto = @IDProducto
 
 	SET @Subtotal = @Cantidad * @Precio
 
