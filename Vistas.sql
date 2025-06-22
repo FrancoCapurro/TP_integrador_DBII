@@ -1,7 +1,6 @@
 USE master
 GO
 USE TPI_BDII_GRUPO18
-
 CREATE VIEW Vista_Productos_Stock AS
 SELECT 
     p.IDProducto, p.NombreProducto AS Producto, c.NombreCategoria, m.NombreMarca, p.Talle, p.Color, p.PrecioLista, p.Stock
@@ -9,7 +8,7 @@ FROM Producto p
 JOIN Categoria c ON p.IDCategoria = c.IDCategoria
 JOIN Marca m ON p.IDMarca = m.IDMarca;
 
-CREATE VIEW Vista_Ventas_Clientes AS
+ VIEW Vista_Ventas_Clientes AS
 SELECT 
     v.IDVenta, v.FechaVenta, v.IDCliente,
    CONCAT(cl.Nombre, ' ', cl.Apellido) AS Cliente,

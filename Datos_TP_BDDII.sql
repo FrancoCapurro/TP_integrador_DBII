@@ -137,6 +137,24 @@ INSERT INTO Cliente (Nombre, Apellido, Telefono) VALUES
 INSERT INTO Venta (FechaVenta, TotalVenta, IDCliente, IDFormaDePago)
 VALUES ('2025-06-20', 60000.00, 3, 4);
 
+
 -- Venta 2
 INSERT INTO Venta (FechaVenta, TotalVenta, IDCliente, IDFormaDePago)
 VALUES ('2025-06-19', 85000.00, 2, 3)
+
+--NUEVOS DATOS PARA VISTAS
+INSERT INTO Venta (FechaVenta, TotalVenta, IDCliente, IDFormaDePago) VALUES
+('2025-06-01', 36876.98, 1, 1),
+('2025-06-01', 48885.70, 2, 2),
+('2025-06-02', 45153.05, 3, 3),
+('2025-06-02', 41051.02, 4, 4),
+('2025-06-03', 36151.54, 5, 1);
+
+INSERT INTO DetalleVenta (CantidadVenta, PrecioUnitario, SubTotalVenta, IDVenta, IDProducto) VALUES
+(2, 18438.49, 36876.98, 1, 1),
+(1, 48885.70, 48885.70, 2, 3),
+(1, 45153.05, 45153.05, 3, 5),
+(1, 41051.02, 41051.02, 4, 6),
+(1, 36151.54, 36151.54, 5, 8);
+
+SELECT * FROM DetalleVenta
