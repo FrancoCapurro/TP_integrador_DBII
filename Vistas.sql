@@ -18,4 +18,9 @@ FROM Venta v
 LEFT JOIN Cliente cl ON v.IDCliente = cl.IDCliente
 JOIN FormaDePago f ON v.IDFormaDePago = f.IDFormaDePago;
 
+--select * from Vista_Productos_Stock
+--select * from Vista_Ventas_Clientes
+
+
+
 
