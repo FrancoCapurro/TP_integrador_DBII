@@ -21,7 +21,7 @@ BEGIN TRY
 
   -- AJUSTE STOCK
 
-	UPDATE Productos SET Stock = @StockActual + @Cantidad_Anterior WHERE IDProducto = @IDProducto_Anterior
+	UPDATE Productos SET Stock = Stock + @Cantidad_Anterior WHERE IDProducto = @IDProducto_Anterior
     
 	-- AJUSTE TOTAL VENTA
 
