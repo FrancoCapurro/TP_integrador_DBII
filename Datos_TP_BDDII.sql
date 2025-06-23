@@ -299,6 +299,15 @@ INSERT INTO DetallesCompras (IDCompra, IDProducto, CantidadCompra, CostoUnitario
 (3,39,30,13006.96,390208.68),
 (3,40,30,27363.39,820901.7);
 
+insert into TiposMovimientos (NombreMovimiento, Motivo, ImpactoStock,Estado) VALUES
+('Entrada', 'Compra a proveedor', 1, 1),
+('Entrada', 'Devolución de cliente', 1, 1),
+('Salida', 'Venta a cliente', -1, 1),
+('Salida', 'Devolución a proveedor', -1, 1),
+('Entrada', 'Ajuste manual positivo', 1, 1),
+('Salida', 'Ajuste manual negativo', -1, 1);
+
+
 
 
 

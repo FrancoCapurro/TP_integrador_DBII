@@ -1,4 +1,4 @@
-USE TPI_BDII_GRUPO18
+--USE TPI_BDII_GRUPO18
 CREATE VIEW VW_Top3ProductosMasVendidos_Mes AS
 SELECT 
     Anio,
@@ -35,6 +35,9 @@ FROM (
         c.NombreCategoria
 ) AS TopMensual
 WHERE Pos_maxima <= 3;
+
+--AQUI VEMOS LAS VENTAS TOTALES DEL MES DE MAYO Y JUNIO
+--SELECT *FROM VENTAS--
 
 -- los top 3 productos más vendidos por mes
 /*SELECT * FROM VW_Top3ProductosMasVendidos_Mes

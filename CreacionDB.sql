@@ -116,6 +116,11 @@ CREATE TABLE TiposMovimientos (
     NombreMovimiento VARCHAR (50) not null,
     Motivo VARCHAR (50) not null
 )
+GO 
+ALTER TABLE TiposMovimientos
+ADD ImpactoStock SMALLINT not NULL  CHECK (ImpactoStock IN (1, -1)),
+Estado BIT NOT NULL DEFAULT 1;
+
 GO
 
 CREATE TABLE MovimientosInventarios(
