@@ -34,7 +34,7 @@ El sistema desarrollado permite gestionar de manera eficiente el inventario de u
 
 ## 🔄 Diagrama DER
  ```bash
-    https://www.drawdb.app/editor?shareId=77bbbee1d7ea7a31e15e969a4785faa6
+https://www.drawdb.app/editor?shareId=ec2dc1eac24a55dfcfe7caaedee5123a
 ```
 ## Link de video
  ```bash
